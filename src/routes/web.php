@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/blog/', [PostsController::class, 'list'])
+    ->name('post.list');
+Route::get('/blog/create/', [PostsController::class, 'create'])
+    ->name('post.create');
+Route::post('/blog/create/', [PostsController::class, 'create_send'])
+    ->name('post.create_send');
+Route::get('/blog/update/{id}/', [PostsController::class, 'update'])
+    ->name('post.update');
+Route::post('/blog/update/{id}/', [PostsController::class, 'update_send'])
+    ->name('post.update_send');
+Route::get('/blog/delete/{id}/', [PostsController::class, 'delete'])
+    ->name('post.delete');
+Route::get('/blog/detail/{id}/', [PostsController::class, 'detail'])
+    ->name('post.detail');
