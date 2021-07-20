@@ -9,7 +9,8 @@ class PostsController extends Controller
 {
     public function list()
     {
-        $posts = Post::all(); // すべての投稿を取得
+        // すべての投稿を「最新投稿順（created_at カラムの降順）」に取得
+        $posts = Post::orderBy('created_at', 'desc')->get();
         return view('posts.list', [
             'posts' => $posts
         ]);
