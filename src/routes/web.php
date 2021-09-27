@@ -24,6 +24,8 @@ Route::get('/blog/update/{id}/', [PostsController::class, 'update'])
     ->name('post.update');
 Route::post('/blog/update/{id}/', [PostsController::class, 'update_send'])
     ->name('post.update_send');
+Route::get('/blog/confirm/{id}/', [PostsController::class, 'confirm'])
+    ->name('post.confirm');
 Route::get('/blog/delete/{id}/', [PostsController::class, 'delete'])
     ->name('post.delete');
 Route::get('/blog/detail/{id}/', [PostsController::class, 'detail'])

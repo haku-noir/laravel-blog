@@ -60,4 +60,22 @@ class PostsController extends Controller
         $post->save();
         return redirect(route('post.list'));
     }
+
+    // 削除の確認画面の表⽰
+    public function confirm($id)
+    {
+        $post = Post::findOrFail($id);
+        return view('posts.confirm', [
+            'post' => $post
+        ]);
+    }
+
+    // DBから投稿を削除
+    public function delete($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->delete;
+        return redirect(route('post.list'));
+    }
+
 }

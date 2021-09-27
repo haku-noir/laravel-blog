@@ -11,7 +11,7 @@
                 <p> 更新⽇: {{ date("Y/m/d H:i:s", strtotime($post->updated_at)) }}</p>
                 <p>
                     <a class="button is-primary" href="{{ route('post.update', ['id' => $post->id]) }}"> 編集</a>
-                    <a class="button is-primary" href="{{ route('post.delete', ['id' => $post->id]) }}"> 削除</a>
+                    <a class="button is-primary" href="{{ route('post.confirm', ['id' => $post->id]) }}"> 削除</a>
                 </p>
             </article>
         @endforeach
