@@ -36,8 +36,8 @@ class PostsController extends Controller
     // 詳細ページの表⽰
     public function detail($id)
     {
-        $post = Post::where('id', $id)->get();
-        return view('posts.list', [
+        $post = Post::findOrFail($id);
+        return view('posts.detail', [
             'post' => $post
         ]);
     }
