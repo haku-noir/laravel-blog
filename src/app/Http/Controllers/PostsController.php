@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Pagination\Paginator;
 
 class PostsController extends Controller
 {
     public function list()
     {
-        // すべての投稿を「最新投稿順（created_at カラムの降順）」に取得
-        $posts = Post::orderBy('created_at', 'desc')->get();
+        // すべての投稿を「最新投稿順（created_at カラムの降順）」に取得（ページネーションの有効化）
+        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
         return view('posts.list', [
             'posts' => $posts
         ]);
