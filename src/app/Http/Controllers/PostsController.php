@@ -16,7 +16,7 @@ class PostsController extends Controller
         ]);
     }
 
-    // 新規登録フォーム表⽰
+    // 新規登録フォームの表⽰
     public function create()
     {
         return view('posts.create');
@@ -31,5 +31,14 @@ class PostsController extends Controller
         $post->content = $request->content;
         $post->save();
         return redirect(route('post.list'));
+    }
+
+    // 詳細ページの表⽰
+    public function detail($id)
+    {
+        $post = Post::where('id', $id)->get();
+        return view('posts.list', [
+            'post' => $post
+        ]);
     }
 }
