@@ -41,4 +41,23 @@ class PostsController extends Controller
             'post' => $post
         ]);
     }
+
+    // 編集フォームの表⽰
+    public function update($id)
+    {
+        $post = Post::findOrFail($id);
+        return view('posts.update', [
+            'post' => $post
+        ]);
+    }
+
+    // フォームに⼊⼒されたデータにDBを更新
+    public function update_send(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save();
+        return redirect(route('post.list'));
+    }
 }
