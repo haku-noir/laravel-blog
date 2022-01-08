@@ -75,7 +75,7 @@ class PostsController extends Controller
     public function delete($id)
     {
         $post = Post::findOrFail($id);
-        $post->delete;
+        $post->delete();
         return redirect(route('post.list'));
     }
 

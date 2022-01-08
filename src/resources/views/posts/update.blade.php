@@ -1,7 +1,7 @@
 @extends('posts.layout')
 @section('content')
 <h1 class="title">編集</h1>
-<form method="POST" action="/blog/update/">
+<form method="POST" action="/blog/update/{{ $post->id }}">
     @csrf
     <b>タイトル</b><br>
     <input name="title" value="{{ $post->title }}"><br><br>

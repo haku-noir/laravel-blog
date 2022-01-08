@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,19 +13,12 @@ use App\Http\Controllers\PostsController;
 |
 */
 
-Route::get('/blog/', [PostsController::class, 'list'])
-    ->name('post.list');
-Route::get('/blog/create/', [PostsController::class, 'create'])
-    ->name('post.create');
-Route::post('/blog/create/', [PostsController::class, 'create_send'])
-    ->name('post.create_send');
-Route::get('/blog/update/{id}/', [PostsController::class, 'update'])
-    ->name('post.update');
-Route::post('/blog/update/{id}/', [PostsController::class, 'update_send'])
-    ->name('post.update_send');
-Route::get('/blog/confirm/{id}/', [PostsController::class, 'confirm'])
-    ->name('post.confirm');
-Route::get('/blog/delete/{id}/', [PostsController::class, 'delete'])
-    ->name('post.delete');
-Route::get('/blog/detail/{id}/', [PostsController::class, 'detail'])
-    ->name('post.detail');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
