@@ -63,13 +63,13 @@ class PostsController extends Controller
     }
 
     // 削除の確認画面の表⽰
-    public function confirm($id)
-    {
-        $post = Post::findOrFail($id);
-        return view('posts.confirm', [
-            'post' => $post
-        ]);
-    }
+    // public function confirm($id)
+    // {
+    //     $post = Post::findOrFail($id);
+    //     return view('posts.confirm', [
+    //         'post' => $post
+    //     ]);
+    // }
 
     // DBから投稿を削除
     public function delete($id)
