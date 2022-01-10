@@ -1,6 +1,15 @@
 @extends('posts.layout')
 @section('content')
 <h1 class="title">編集</h1>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <form method="POST" action="/blog/update/{{ $post->id }}">
     @csrf
     <b>タイトル</b><br>

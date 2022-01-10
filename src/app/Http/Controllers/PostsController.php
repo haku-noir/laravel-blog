@@ -26,6 +26,10 @@ class PostsController extends Controller
     // フォームに⼊⼒されたデータをDBに登録
     public function create_send(Request $request)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:20',
+            'content' => 'required|string|between:10,140',
+        ]);
         $post = new Post();
         $post->author = 1;
         $post->title = $request->title;
@@ -55,6 +59,10 @@ class PostsController extends Controller
     // フォームに⼊⼒されたデータにDBを更新
     public function update_send(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:20',
+            'content' => 'required|string|between:10,140',
+        ]);
         $post = Post::findOrFail($id);
         $post->title = $request->title;
         $post->content = $request->content;
@@ -63,13 +71,13 @@ class PostsController extends Controller
     }
 
     // 削除の確認画面の表⽰
-    // public function confirm($id)
-    // {
-    //     $post = Post::findOrFail($id);
-    //     return view('posts.confirm', [
-    //         'post' => $post
-    //     ]);
-    // }
+    public function confirm($id)
+    {
+        $post = Post::findOrFail($id);
+        return view('posts.confirm', [
+            'post' => $post
+        ]);
+    }
 
     // DBから投稿を削除
     public function delete($id)

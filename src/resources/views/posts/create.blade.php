@@ -1,6 +1,15 @@
 @extends('posts.layout')
 @section('content')
 <h1 class="title">新規投稿</h1>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <form method="POST" action="/blog/create/">
     @csrf
     <b>タイトル</b><br>
