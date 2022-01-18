@@ -58,7 +58,17 @@ class RestController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+        if($post){
+            return response()->json([
+                'message' => 'ok',
+                'data' => $post
+            ], 200, [], JSON_UNESCAPED_UNICODE);
+        }else{
+            return response()->json([
+                'message' => 'Post not found',
+            ], 404);
+        }
     }
 
     /**
