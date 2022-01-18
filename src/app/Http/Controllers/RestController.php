@@ -117,6 +117,15 @@ class RestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $success = Post::where('id', $id)->delete();
+        if($success){
+            return response()->json([
+                'message'=>'Post deleted successfully',
+            ], 200);
+        }else{
+            return response()->json([
+                'message'=>'Post deleted failed',
+            ], 404);
+        }
     }
 }
