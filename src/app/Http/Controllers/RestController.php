@@ -39,7 +39,15 @@ class RestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post();
+        $post->author = 1;
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save();
+        return response()->json([
+            'message' => 'Post created successfully',
+            'data' => $post
+        ], 201, [], JSON_UNESCAPED_UNICODE);
     }
 
     /**
