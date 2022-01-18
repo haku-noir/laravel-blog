@@ -91,7 +91,22 @@ class RestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update = [
+            'title'=>$request->title,
+            'content'=>$request->content
+        ];
+        $success = Post::where('id', $id)->update($update);
+        $post = Post::find($id);
+        if($success){
+            return response()->json([
+                'message'=>'Post updated successfully',
+                'data' => $post
+            ], 200);
+        }else{
+            return response ()->json([
+                'message'=>'Post update failed',
+            ], 404);
+        }
     }
 
     /**
