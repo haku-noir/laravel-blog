@@ -31,7 +31,7 @@ class PostsController extends Controller
             'content' => 'required|string|between:10,140',
         ]);
         $post = new Post();
-        $post->author = 1;
+        $post->user_id = $request->user_id;
         $post->title = $request->title;
         $post->content = $request->content;
         $post->save();

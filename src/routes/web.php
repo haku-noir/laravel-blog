@@ -18,4 +18,8 @@ Route::get('/blog/delete/{id}/', [PostsController::class, 'delete'])
 Route::get('/blog/detail/{id}/', [PostsController::class, 'detail'])
 ->middleware(['auth'])->name('post.detail');
 
+use App\Http\Controllers\UsersController;
+Route::get('/blog/users/detail/{id}', [UsersController::class, 'detail'])
+->middleware(['auth'])->name('user.detail');
+
 require __DIR__.'/auth.php';

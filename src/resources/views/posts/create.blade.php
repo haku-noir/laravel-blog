@@ -17,7 +17,7 @@
 
     <b>本⽂</b><br>
     <textarea cols="50" rows="15" name="content" placeholder="本⽂を⼊⼒してください。"></textarea><br>
-
+    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
     <input type="submit" class="button is-primary" value="送信">
     <a class="button is-primary" href="{{ route('post.list') }}"> キャンセル</a>
 </form>

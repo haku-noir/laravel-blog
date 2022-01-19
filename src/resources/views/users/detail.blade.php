@@ -7,7 +7,11 @@
     <input type="submit" class="button is-info" value="ログアウト">
     </form>
 </div>
-<p><a class="button is-primary" href="{{ route('post.create') }}">追加</a></p>
+<br>
+<div class="hero is-dark p-3">
+    <h2 class="title has-textwhite">{{ $user->name }}</h2>
+    <p class="has-textwhite">{{ $user->email }}</p>
+</div>
 <x-post-list :posts="$posts">
 </x-post-list>
 @endsection
