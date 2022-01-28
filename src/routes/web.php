@@ -23,3 +23,7 @@ Route::get('/blog/users/detail/{id}', [UsersController::class, 'detail'])
 ->middleware(['auth'])->name('user.detail');
 
 require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
