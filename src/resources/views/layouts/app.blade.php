@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ __('Laravel Blog') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -21,10 +21,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm py-0">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand px-5" href="{{ route('post.list') }}">
+                    {{ __('Laravel Blog') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -33,7 +33,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @guest
+                        @else
+                                <a class="navbar-brand px-2 mt-3" href="{{ route('post.list') }}">
+                                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="/bootstrap-icons/bootstrap-icons.svg#card-list"></use></svg>
+                                    <p class="mx-auto text-center">{{ __('Posts') }}</p>
+                                </a>
+                                <a class="navbar-brand px-2 mt-3" href="{{ route('user.list') }}">
+                                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="/bootstrap-icons/bootstrap-icons.svg#people"></use></svg>
+                                    <p class="mx-auto text-center">{{ __('Users') }}</p>
+                                </a>
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -52,12 +62,17 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                            <li class="navbar-brand dropdown px-2 mt-3">
+                                <a id="navbarDropdown" class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="/bootstrap-icons/bootstrap-icons.svg#person-circle"></use></svg>
+                                    <p class="mx-auto text-center">{{ Auth::user()->name }}</p>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('user.detail', ['id' => Auth::user()->id]) }}">
+                                        {{ __('My Page') }}
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -76,7 +91,9 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>

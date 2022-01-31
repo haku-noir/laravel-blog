@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\PostsController;
+Route::get('/', function () {
+  return redirect('/blog/');
+});
 Route::get('/blog/', [PostsController::class, 'list'])
 ->middleware(['auth'])->name('post.list');
 Route::get('/blog/create/', [PostsController::class, 'create'])
@@ -19,6 +22,8 @@ Route::get('/blog/detail/{id}/', [PostsController::class, 'detail'])
 ->middleware(['auth'])->name('post.detail');
 
 use App\Http\Controllers\UsersController;
+Route::get('/blog/users/', [UsersController::class, 'list'])
+->middleware(['auth'])->name('user.list');
 Route::get('/blog/users/detail/{id}', [UsersController::class, 'detail'])
 ->middleware(['auth'])->name('user.detail');
 

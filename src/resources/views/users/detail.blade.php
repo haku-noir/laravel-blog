@@ -1,17 +1,32 @@
-@extends('posts.layout')
+@extends('layouts.app')
 @section('content')
-<div class="has-text-right">
-    {{ Auth::user()->name }}(id={{ Auth::id() }})
-    <form method="post" action="{{ route('logout') }}">
-    @csrf
-    <input type="submit" class="button is-info" value="ログアウト">
-    </form>
+<div class="row justify-content-center mb-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-3">
+                    <h4 class="card-title">{{ $user->name }}</h4>
+                    <p class="card-text">{{ $user->email }}</p>
+                    <p class="card-subtitle">登録⽇: {{ date("Y/m/d H:i:s", strtotime($user->created_at)) }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<br>
-<div class="hero is-dark p-3">
-    <h2 class="title has-textwhite">{{ $user->name }}</h2>
-    <p class="has-textwhite">{{ $user->email }}</p>
+<div class="row justify-content-center mb-4">
+    @foreach ($posts as $post)
+        <x-post-card :post="$post">
+        </x-post-card>
+    @endforeach
+    <div class="d-flex justify-content-center">
+        {{ $posts->links() }}
+    </div>
 </div>
-<x-post-list :posts="$posts">
-</x-post-list>
+<div class="row justify-content-center mb-0">
+    <div class="col-md-8">
+        <button type="button" class="btn btn-link" onClick="history.back()">
+            {{ __('戻る') }}
+        </button>
+    </div>
+</div>
 @endsection

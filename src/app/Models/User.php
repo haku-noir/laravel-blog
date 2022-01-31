@@ -44,6 +44,7 @@ class User extends Authenticatable
     // User has many Post
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        // ユーザが送信した投稿の一覧を「最新投稿順（created_at カラムの降順）」で返す
+        return $this->hasMany(Post::class)->orderBy('created_at', 'desc');
     }
 }

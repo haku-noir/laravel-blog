@@ -11,7 +11,7 @@ class PostsController extends Controller
     public function list()
     {
         // すべての投稿を「最新投稿順（created_at カラムの降順）」に取得（ページネーションの有効化）
-        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(6);
         return view('posts.list', [
             'posts' => $posts
         ]);

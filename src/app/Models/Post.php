@@ -12,6 +12,7 @@ class Post extends Model
     // Post belongs to User
     public function user()
     {
+        // 投稿を送信したユーザを返す
         return $this->belongsTo(User::class);
     }
 }

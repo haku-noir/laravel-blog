@@ -1,13 +1,17 @@
-@extends('posts.layout')
+@extends('layouts.app')
 @section('content')
-<div class="has-text-right">
-    {{ Auth::user()->name }}(id={{ Auth::id() }})
-    <form method="post" action="{{ route('logout') }}">
-    @csrf
-    <input type="submit" class="button is-info" value="ログアウト">
-    </form>
+<h1 class="display-4 text-center">Posts</h1>
+<p>
+  <a class="btn btn-lg btn-outline-primary" href="{{ route('post.create') }}">
+    新規投稿
+    <svg class="bi" width="18" height="18"><use xlink:href="/bootstrap-icons/bootstrap-icons.svg#send"></use></svg>
+  </a>
+</p>
+<div class="row justify-content-center">
+  @foreach ($posts as $post)
+    <x-post-card :post="$post">
+    </x-post-card>
+  @endforeach
+  <p class="text-center">{{ $posts->links() }}</p>
 </div>
-<p><a class="button is-primary" href="{{ route('post.create') }}">追加</a></p>
-<x-post-list :posts="$posts">
-</x-post-list>
 @endsection

@@ -1,24 +1,50 @@
-@extends('posts.layout')
+@extends('layouts.app')
 @section('content')
-<h1 class="title">編集</h1>
 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger" role="alert">
+            {{ $error }}
+        </div>
+    @endforeach
 @endif
-<form method="POST" action="/blog/update/{{ $post->id }}">
-    @csrf
-    <b>タイトル</b><br>
-    <input name="title" value="{{ $post->title }}"><br><br>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">{{ __('投稿編集') }}</div>
 
-    <b>本⽂</b><br>
-    <textarea cols="50" rows="15" name="content">{{ $post->content }}</textarea><br>
+            <div class="card-body">
+                <form method="POST" action="{{ route('post.update_send', ['id' => $post->id]) }}">
+                    @csrf
 
-    <input type="submit" class="button is-primary" value="送信">
-    <a class="button is-primary" href="{{ route('post.list') }}"> キャンセル</a>
-</form>
+                    <div class="row mb-3">
+                        <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('タイトル') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="title" type="text" class="form-control" name="title" value="{{ $post->title }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="content" class="col-md-4 col-form-label text-md-end">{{ __('本文') }}</label>
+
+                        <div class="col-md-6">
+                        <textarea id="content" cols="50" rows="5" class="form-control" name="content" required>{{ $post->content }}</textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-0">
+                        <div class="col-md-8 offset-md-4">
+                            <button type="submit" class="btn btn-success">
+                                {{ __('更新') }}
+                            </button>
+
+                            <button type="button" class="btn btn-link" onClick="history.back()">
+                                {{ __('キャンセル') }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
